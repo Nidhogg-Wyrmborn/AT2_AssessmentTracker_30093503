@@ -13,5 +13,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
+        
+        <!--TODO: Inputs -->
     </Grid>
 </Window>
