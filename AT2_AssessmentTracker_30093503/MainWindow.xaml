@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AT2_AssessmentTracker_30093503"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="600">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -15,5 +15,40 @@
         </Grid.RowDefinitions>
         
         <!--TODO: Inputs -->
+        <StackPanel Orientation="Horizontal" Margin="5" Grid.Row="0">
+            <!-- Due Date: Date Picker -->
+            <StackPanel Orientation="Vertical" Width="120" Margin="5,0,0,0">
+                <Label Content=" Due Date" FontWeight="Bold" Height="30" />
+                <DatePicker x:Name="dueDate" Height="30" />
+                <!-- Submit Button: Button -->
+                <StackPanel Orientation="Horizontal" Width="auto" Margin="0,5,0,0">
+                    <Button Content="Submit" FontWeight="Bold" Width="65" Height="30" Margin="0,5,0,0" />
+                </StackPanel>
+            </StackPanel>
+            <!-- Assessment Name: Text box -->
+            <StackPanel Orientation="Vertical" Width="150" Margin="5,0,0,0">
+                <Label Content="Assessment Name" FontWeight="Bold" Height="30" />
+                <TextBox x:Name="assName" Height="30" />
+            </StackPanel>
+            <!-- Unit Name: Text Box -->
+            <StackPanel Orientation="Vertical" Width="100" Margin="5,0,0,0">
+                <Label Content="Unit Name" FontWeight="Bold" Height="30" />
+                <TextBox x:Name="unitName" Height="30" />
+            </StackPanel>
+            <!-- Assessment Type: Text box -->
+            <StackPanel Orientation="Vertical" Width="150" Margin="5,0,0,0">
+                <Label Content="Assessment Type" FontWeight="Bold" Height="30" />
+                <TextBox x:Name="assType" Height="30" />
+                <StackPanel Orientation="Horizontal" Width="auto" Margin="0,5,0,0">
+                    <!-- Save Button: Button 
+                         Saves current assessments to file 
+                         MUST HAVE Dropdown option for "save as" -->
+                    <Button Content="Save" FontWeight="Bold" Width="45" Height="30" Margin="30,5,0,0" />
+                    <!-- Load Button: Button
+                     Loads assessments from file (open file dialog) -->
+                    <Button Content="Load" FontWeight="Bold" Width="45" Height="30" Margin="5,5,0,0" />
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>
