@@ -39,15 +39,17 @@
             <StackPanel Orientation="Vertical" Width="150" Margin="5,0,0,0">
                 <Label Content="Assessment Type" FontWeight="Bold" Height="30" />
                 <TextBox x:Name="assType" Height="30" />
-                <StackPanel Orientation="Horizontal" Width="auto" Margin="0,5,0,0">
-                    <!-- Save Button: Button 
+                <DockPanel Width="auto" Margin="0,5,0,0">
+                    <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Width="auto" Margin="0,5,0,0">
+                        <!-- Save Button: Button 
                          Saves current assessments to file 
                          TODO: MUST HAVE Dropdown option for "save as" -->
-                    <Button Content="Save" FontWeight="Bold" Width="45" Height="30" Margin="30,5,0,0" />
-                    <!-- Load Button: Button
-                     Loads assessments from file (open file dialog) -->
-                    <Button Content="Load" FontWeight="Bold" Width="45" Height="30" Margin="5,5,0,0" />
-                </StackPanel>
+                        <Button Content="Save" FontWeight="Bold" Width="45" Height="30" Margin="5,5,0,5" />
+                        <!-- Load Button: Button
+                         Loads assessments from file (open file dialog) -->
+                        <Button Content="Load" FontWeight="Bold" Width="45" Height="30" Margin="5,5,5,5" />
+                    </StackPanel>
+                </DockPanel>
             </StackPanel>
         </StackPanel>
         <!-- Display Assessments -->
