@@ -42,7 +42,7 @@
                 <StackPanel Orientation="Horizontal" Width="auto" Margin="0,5,0,0">
                     <!-- Save Button: Button 
                          Saves current assessments to file 
-                         MUST HAVE Dropdown option for "save as" -->
+                         TODO: MUST HAVE Dropdown option for "save as" -->
                     <Button Content="Save" FontWeight="Bold" Width="45" Height="30" Margin="30,5,0,0" />
                     <!-- Load Button: Button
                      Loads assessments from file (open file dialog) -->
@@ -50,5 +50,7 @@
                 </StackPanel>
             </StackPanel>
         </StackPanel>
+        <!-- Display Assessments -->
+        <!-- TODO: Display assessments, allow sorting -->
     </Grid>
 </Window>
