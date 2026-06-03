@@ -40,3 +40,5 @@ F:\Tafe\C# Course\AT2\2.3\Repo\AT2_AssessmentTracker_30093503\AT2_AssessmentTrac
 F:\Tafe\C# Course\AT2\2.3\Repo\AT2_AssessmentTracker_30093503\AT2_AssessmentTracker_30093503\obj\Debug\net8.0-windows\AT2_AssessmentTracker_30093503.pdb
 F:\Tafe\C# Course\AT2\2.3\Repo\AT2_AssessmentTracker_30093503\AT2_AssessmentTracker_30093503\obj\Debug\net8.0-windows\AT2_AssessmentTracker_30093503.genruntimeconfig.cache
 F:\Tafe\C# Course\AT2\2.3\Repo\AT2_AssessmentTracker_30093503\AT2_AssessmentTracker_30093503\obj\Debug\net8.0-windows\ref\AT2_AssessmentTracker_30093503.dll
+D:\Tafe\C# Course\AT2\2.3\Repo\AT2_AssessmentTracker_30093503\AT2_AssessmentTracker_30093503\obj\Debug\net8.0-windows\editDialog.g.cs
+D:\Tafe\C# Course\AT2\2.3\Repo\AT2_AssessmentTracker_30093503\AT2_AssessmentTracker_30093503\obj\Debug\net8.0-windows\editDialog.baml
