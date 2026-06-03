@@ -124,5 +124,60 @@ namespace AT2_AssessmentTracker_30093503
             dueDate.Focus();
 
         }
+
+        private void BtnDeleteAssessment_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button button && button.Tag is string[] selectedAssessment)
+            {
+                assessmentList.Remove(selectedAssessment);
+                WriteToFile();
+                DisplayAssessments();
+            }
+        }
+
+        private void MenuNewFile_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuOpenFile_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuSaveFile_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuSaveAsFile_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuQuit_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuShowComplete_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuSortName_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuSortDate_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuSortUnit_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -18,22 +18,21 @@
         </Grid.RowDefinitions>
         <Menu Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0">
             <MenuItem Header="File">
-                <MenuItem Header="New" />
-                <MenuItem Header="Open" />
-                <MenuItem Header="Save" />
-                <MenuItem Header="Save As" />
+                <MenuItem Header="New" Click="MenuNewFile_Click" />
+                <MenuItem Header="Open" Click="MenuOpenFile_Click"/>
+                <MenuItem Header="Save" Click="MenuSaveFile_Click"/>
+                <MenuItem Header="Save As" Click="MenuSaveAsFile_Click"/>
                 <Separator />
-                <MenuItem Header="Exit" />
+                <MenuItem Header="Exit" Click="MenuQuit_Click"/>
             </MenuItem>
             <MenuItem Header="View">
                 <MenuItem Header="Sort by">
-                    <MenuItem Header="Name" IsCheckable="True" />
-                    <MenuItem Header="Date" IsCheckable="True" />
-                    <MenuItem Header="Unit" IsCheckable="True" />
-                    <MenuItem Header="Type" IsCheckable="True" />
-                    <MenuItem Header="Completion" IsCheckable="True" />
+                    <MenuItem Header="Name" IsCheckable="True" Click="MenuSortName_Click"/>
+                    <MenuItem Header="Date" IsCheckable="True" Click="MenuSortDate_Click"/>
+                    <MenuItem Header="Unit" IsCheckable="True" Click="MenuSortUnit_Click"/>
+                    <MenuItem Header="Type" IsCheckable="True" Click="MenuSortType_Click"/>
                 </MenuItem>
-                <MenuItem Header="Hide Complete" IsCheckable="True" />
+                <MenuItem Header="Show Complete" Click="MenuShowComplete_Click"/>
             </MenuItem>
         </Menu>
         <!--TODO: Inputs -->
@@ -79,7 +78,8 @@
                                         FontWeight="Bold"
                                         Foreground="red"
                                         Padding="4,0"
-                                        Tag="{Binding Data}"/>
+                                        Tag="{Binding Data}"
+                                        Click="BtnDeleteAssessment_Click"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
