@@ -18,22 +18,6 @@ namespace AT2_AssessmentTracker_30093503
     /// </summary>
     /// 
 
-    /* TODO:
-     * Include new dialog for displaying Completed assessments 
-     * OR
-     * Include completed assessments at the bottom of the current display
-     * Include new List for completed assessments
-     * Compact the edit dialog into a reasonable size
-     * Include the ability to save on quit
-     * Allow loading and saving to file
-     * allow sorting assessments by Name, Unit, Type, Due Date, completion
-     * auto sort (order of 1 (highest priority) - 5 (lowest priority)):
-     * 1: Completion (complete at bottom)
-     * 2: due date (overdue/soonest at top)
-     * 3: unit
-     * 4: type
-     * 5: name
-     */
     public partial class MainWindow : Window
     {
         private string textFile = "default.txt";
