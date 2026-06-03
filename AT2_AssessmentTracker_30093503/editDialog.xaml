@@ -46,9 +46,9 @@
                             </MenuItem.Header>
                             <MenuItem.ContextMenu>
                                 <ContextMenu>
-                                    <MenuItem Header="NYM" IsCheckable="True" x:Name="MenuItemNYM" />
-                                    <MenuItem Header="NYS" IsCheckable="True" x:Name="MenuItemNYS" />
-                                    <MenuItem Header="S"   IsCheckable="True" x:Name="MenuItemS"   />
+                                    <MenuItem Header="NYM" Tag="NYM" Click="ChangeScore" />
+                                    <MenuItem Header="NYS" Tag="NYS" Click="ChangeScore" />
+                                    <MenuItem Header="S"   Tag="S"   Click="ChangeScore" />
                                 </ContextMenu>
                             </MenuItem.ContextMenu>
                         </MenuItem>

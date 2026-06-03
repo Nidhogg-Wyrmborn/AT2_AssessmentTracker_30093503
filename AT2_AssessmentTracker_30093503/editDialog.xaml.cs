@@ -22,7 +22,10 @@ namespace AT2_AssessmentTracker_30093503
         public editDialog()
         {
             InitializeComponent();
+            score = "NYM";
         }
+
+        private string score;
 
         public DateTime? dDate
         {
@@ -55,12 +58,13 @@ namespace AT2_AssessmentTracker_30093503
 
         public void SetScore(int i)
         {
-            ScoreText.Text = i == 0 ? "NYM" : i == 1 ? "NYS" : "S";
+            this.score = i == 0 ? "NYM" : i == 1 ? "NYS" : "S";
+            ScoreText.Text = this.score;
         }
 
         public string GetScore()
         {
-            return ScoreText.Text;
+            return this.score;
         }
 
         private void SetScoreButton_Click(object sender, RoutedEventArgs e)
@@ -69,6 +73,19 @@ namespace AT2_AssessmentTracker_30093503
             if (button != null)
             {
                 button.ContextMenu.IsOpen = true;
+            }
+        }
+
+        private void ChangeScore(object sender, RoutedEventArgs e)
+        {
+            var button = sender as MenuItem;
+            if (button != null)
+            {
+                if (button.Tag != null)
+                {
+                    this.score = button.Tag.ToString();
+                    ScoreText.Text = this.score;
+                }
             }
         }
     }
