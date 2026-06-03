@@ -70,7 +70,8 @@
                     <GridViewColumn Header="Date" Width="100" DisplayMemberBinding="{Binding Date}" />
                     <GridViewColumn Header="Assessment Name" Width="170" DisplayMemberBinding="{Binding Name}" />
                     <GridViewColumn Header="Unit" Width="100" DisplayMemberBinding="{Binding Unit}" />
-                    <GridViewColumn Header="Type" Width="100" DisplayMemberBinding="{Binding UnitType}" />
+                    <GridViewColumn Header="Type" Width="60" DisplayMemberBinding="{Binding UnitType}" />
+                    <GridViewColumn Header="Score" Width="40" DisplayMemberBinding="{Binding Score}" />
                     <GridViewColumn Header="" Width="50">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -86,12 +87,12 @@
                     <GridViewColumn Header="" Width="50">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="&#x2713;"
+                                <Button Content="&#128393;"
                                         FontWeight="Bold"
                                         Foreground="green"
                                         Padding="4,0"
                                         Tag="{Binding Data}"
-                                        Click="BtnMarkAssessment_Click"/>
+                                        Click="BtnEditAssessment_Click"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

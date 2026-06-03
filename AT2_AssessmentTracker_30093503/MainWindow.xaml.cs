@@ -39,7 +39,8 @@ namespace AT2_AssessmentTracker_30093503
                     Date = assessment[0],
                     Name = assessment[1],
                     Unit = assessment[2],
-                    UnitType = assessment[3]
+                    UnitType = assessment[3],
+                    Score = assessment[4]
                 };
                 lvwAssessments.Items.Add(displayItem);
             }
@@ -73,14 +74,15 @@ namespace AT2_AssessmentTracker_30093503
                     while ((line = reader.ReadLine()) != null)
                     {
                         string[] parts = line.Split('|');
-                        if (parts.Length == 4)
+                        if (parts.Length == 5)
                         {
                             assessmentList.Add(new string[]
                             {
                                 parts[0],
                                 parts[1],
                                 parts[2],
-                                parts[3]
+                                parts[3],
+                                parts[4]
                             });
                         }
                         
@@ -109,7 +111,8 @@ namespace AT2_AssessmentTracker_30093503
                 dueDate.SelectedDate.Value.ToString("dd-MM-yyyy"),
                 assName.Text.Trim(),
                 unitName.Text.Trim(),
-                assType.Text.Trim()
+                assType.Text.Trim(),
+                "NYM"
             };
 
             assessmentList.Add(row);
@@ -133,6 +136,11 @@ namespace AT2_AssessmentTracker_30093503
                 WriteToFile();
                 DisplayAssessments();
             }
+        }
+
+        private void BtnEditAssessment_Click(object sender, RoutedEventArgs e)
+        {
+            return;
         }
 
         private void MenuNewFile_Click(object sender, RoutedEventArgs e)
@@ -185,9 +193,5 @@ namespace AT2_AssessmentTracker_30093503
             return;
         }
 
-        private void BtnMarkAssessment_Click(object sender, RoutedEventArgs e)
-        {
-            return;
-        }
     }
 }
