@@ -240,5 +240,9 @@ namespace AT2_AssessmentTracker_30093503
             return;
         }
 
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            WriteToFile(); // until save and load functionality (to custom files) is implemented, just this will suffice
+        }
     }
 }

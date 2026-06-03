@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:AT2_AssessmentTracker_30093503"
         mc:Ignorable="d"
         Title="MainWindow" Height="490" Width="630"
+        Closing="Window_Closing"
         MinHeight="490"
         MinWidth="630">
     <Grid Margin="10">
