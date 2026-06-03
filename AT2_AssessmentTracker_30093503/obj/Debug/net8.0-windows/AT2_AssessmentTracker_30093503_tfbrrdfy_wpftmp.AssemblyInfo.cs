@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AT2_AssessmentTracker_30093503")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c9f1e1b7521e8ffa1e7a726b21c907aa4e0583cc")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e47db160356b056099994d2603bc2c724bb6f4de")]
 [assembly: System.Reflection.AssemblyProductAttribute("AT2_AssessmentTracker_30093503")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AT2_AssessmentTracker_30093503")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

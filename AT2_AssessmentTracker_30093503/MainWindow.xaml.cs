@@ -22,6 +22,7 @@ namespace AT2_AssessmentTracker_30093503
         public MainWindow()
         {
             InitializeComponent();
+            dueDate.SelectedDate = DateTime.Today;
             ReadFromFile();
             DisplayAssessments();
         }
@@ -83,8 +84,8 @@ namespace AT2_AssessmentTracker_30093503
                             });
                         }
                         
+                    }
                 }
-            }
             }
             catch (IOException ex)
             {
@@ -103,6 +104,25 @@ namespace AT2_AssessmentTracker_30093503
                     MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
+            string[] row = new string[]
+            {
+                dueDate.SelectedDate.Value.ToString("dd-MM-yyyy"),
+                assName.Text.Trim(),
+                unitName.Text.Trim(),
+                assType.Text.Trim()
+            };
+
+            assessmentList.Add(row);
+
+            WriteToFile();
+            DisplayAssessments();
+
+            dueDate.SelectedDate = DateTime.Today;
+            assName.Clear();
+            unitName.Clear();
+            assType.Clear();
+            dueDate.Focus();
+
         }
     }
 }
