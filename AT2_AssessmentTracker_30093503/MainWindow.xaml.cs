@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.IO;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -16,6 +17,7 @@ namespace AT2_AssessmentTracker_30093503
     /// </summary>
     public partial class MainWindow : Window
     {
+        private string textFile = "default.txt";
         private List<string[]> assessmentList = new List<string[]> 
         { 
             new string[] {"2026-01-01", "Assessment 1", "Unit1", "Type1"}
@@ -24,6 +26,7 @@ namespace AT2_AssessmentTracker_30093503
         {
             InitializeComponent();
             DisplayAssessments();
+            WriteToFile();
         }
 
         private void DisplayAssessments()
@@ -41,6 +44,24 @@ namespace AT2_AssessmentTracker_30093503
                     UnitType = assessment[3]
                 };
                 lvwAssessments.Items.Add(displayItem);
+            }
+        }
+
+        private void WriteToFile()
+        {
+            try
+            {
+                using (StreamWriter writer = new StreamWriter(textFile))
+                {
+                    foreach (var assessment in assessmentList)
+                    {
+                        writer.WriteLine($"{assessment[0]}|{assessment[1]}|{assessment[2]}|{assessment[3]}");
+                    }
+                }
+            }
+            catch (IOException ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
         }
     }
