@@ -64,5 +64,35 @@ namespace AT2_AssessmentTracker_30093503
                 MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
         }
+
+        private void ReadFromFile()
+        {
+            try
+            {
+                using (StreamReader reader = new StreamReader(textFile))
+                {
+                    string? line;
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        string[] parts = line.Split('|');
+                        if (parts.Length == 4)
+                        {
+                            assessmentList.Add(new string[]
+                            {
+                                parts[0],
+                                parts[1],
+                                parts[2],
+                                parts[3]
+                            });
+                        }
+                        
+                }
+            }
+            }
+            catch (IOException ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
+        }
     }
 }
