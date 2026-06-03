@@ -137,47 +137,57 @@ namespace AT2_AssessmentTracker_30093503
 
         private void MenuNewFile_Click(object sender, RoutedEventArgs e)
         {
-
+            return;
         }
 
         private void MenuOpenFile_Click(object sender, RoutedEventArgs e)
         {
-
+            return;
         }
 
         private void MenuSaveFile_Click(object sender, RoutedEventArgs e)
         {
-
+            return;
         }
 
         private void MenuSaveAsFile_Click(object sender, RoutedEventArgs e)
         {
-
+            return;
         }
 
         private void MenuQuit_Click(object sender, RoutedEventArgs e)
         {
-
+            return;
         }
 
         private void MenuShowComplete_Click(object sender, RoutedEventArgs e)
         {
-
+            return;
         }
 
         private void MenuSortName_Click(object sender, RoutedEventArgs e)
         {
-
+            return;
         }
 
         private void MenuSortDate_Click(object sender, RoutedEventArgs e)
         {
-
+            return;
         }
 
         private void MenuSortUnit_Click(object sender, RoutedEventArgs e)
         {
+            return;
+        }
 
+        private void MenuSortType_Click(object sender, RoutedEventArgs e)
+        {
+            return;
+        }
+
+        private void BtnMarkAssessment_Click(object sender, RoutedEventArgs e)
+        {
+            return;
         }
     }
 }

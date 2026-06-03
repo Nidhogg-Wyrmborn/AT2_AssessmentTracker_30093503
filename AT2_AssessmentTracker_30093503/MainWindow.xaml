@@ -71,15 +71,27 @@
                     <GridViewColumn Header="Assessment Name" Width="170" DisplayMemberBinding="{Binding Name}" />
                     <GridViewColumn Header="Unit" Width="100" DisplayMemberBinding="{Binding Unit}" />
                     <GridViewColumn Header="Type" Width="100" DisplayMemberBinding="{Binding UnitType}" />
-                    <GridViewColumn Header="" Width="100">
+                    <GridViewColumn Header="" Width="50">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="&#x274C;"
+                                <Button Content="&#x1f5d1;"
                                         FontWeight="Bold"
                                         Foreground="red"
                                         Padding="4,0"
                                         Tag="{Binding Data}"
                                         Click="BtnDeleteAssessment_Click"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="" Width="50">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="&#x2713;"
+                                        FontWeight="Bold"
+                                        Foreground="green"
+                                        Padding="4,0"
+                                        Tag="{Binding Data}"
+                                        Click="BtnMarkAssessment_Click"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
