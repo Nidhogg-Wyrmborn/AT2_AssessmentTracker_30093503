@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AT2_AssessmentTracker_30093503"
         mc:Ignorable="d"
-        Title="editDialog" Height="490" Width="630">
+        Title="editDialog" Height="250" Width="350">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -16,26 +16,12 @@
             <!-- Due Date: Date Picker -->
             <StackPanel Orientation="Vertical" Width="120" Margin="5,0,0,0">
                 <Label Content=" Due Date" FontWeight="Bold" Height="30" />
-                <DatePicker x:Name="dueDate" Height="30" />
-                <!-- Submit Button: Button -->
-                <StackPanel Orientation="Horizontal" Width="auto" Margin="0,5,0,0">
-                    <Button Content="Submit" FontWeight="Bold" Width="65" Height="30" Margin="0,5,0,0" Click="OKButton_Click"/>
+                <DatePicker x:Name="dueDate" Height="30" Margin="5,0,0,0" />
+                <!-- Unit Name: Text Box -->
+                <StackPanel Orientation="Vertical" Width="100" Margin="5,0,0,0">
+                    <Label Content="Unit Name" FontWeight="Bold" Height="30" />
+                    <TextBox x:Name="unitName" Height="30" />
                 </StackPanel>
-            </StackPanel>
-            <!-- Assessment Name: Text box -->
-            <StackPanel Orientation="Vertical" Width="150" Margin="5,0,0,0">
-                <Label Content="Assessment Name" FontWeight="Bold" Height="30" />
-                <TextBox x:Name="assName" Height="30" />
-            </StackPanel>
-            <!-- Unit Name: Text Box -->
-            <StackPanel Orientation="Vertical" Width="100" Margin="5,0,0,0">
-                <Label Content="Unit Name" FontWeight="Bold" Height="30" />
-                <TextBox x:Name="unitName" Height="30" />
-            </StackPanel>
-            <!-- Assessment Type: Text box -->
-            <StackPanel Orientation="Vertical" Width="150" Margin="5,0,0,0">
-                <Label Content="Assessment Type" FontWeight="Bold" Height="30" />
-                <TextBox x:Name="assType" Height="30" />
                 <DockPanel Width="auto" Margin="0,5,0,0">
                     <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Width="auto" Margin="0,5,0,0">
                         <MenuItem Click="SetScoreButton_Click" x:Name="SetScoreButton">
@@ -54,6 +40,21 @@
                         </MenuItem>
                     </StackPanel>
                 </DockPanel>
+            </StackPanel>
+            <!-- Assessment Name: Text box -->
+            <StackPanel Orientation="Vertical" Width="160" Margin="5,0,0,0">
+                <Label Content="Assessment Name" FontWeight="Bold" Height="30" />
+                <TextBox x:Name="assName" Height="30" />
+                <!-- Assessment Type: Text box -->
+                <StackPanel Orientation="Vertical" Width="150" Margin="5,0,0,0">
+                    <Label Content="Assessment Type" FontWeight="Bold" Height="30" />
+                    <TextBox x:Name="assType" Height="30" />
+                    
+                </StackPanel>
+                <!-- Submit Button: Button -->
+                <StackPanel Orientation="Vertical" Width="auto" Margin="0,5,0,0">
+                    <Button Content="Submit" FontWeight="Bold" Width="65" Height="30" Margin="0,5,0,0" Click="OKButton_Click"/>
+                </StackPanel>
             </StackPanel>
         </StackPanel>
     </Grid>
