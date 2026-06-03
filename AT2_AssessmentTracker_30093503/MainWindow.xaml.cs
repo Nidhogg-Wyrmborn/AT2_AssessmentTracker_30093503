@@ -18,15 +18,12 @@ namespace AT2_AssessmentTracker_30093503
     public partial class MainWindow : Window
     {
         private string textFile = "default.txt";
-        private List<string[]> assessmentList = new List<string[]> 
-        { 
-            new string[] {"2026-01-01", "Assessment 1", "Unit1", "Type1"}
-        };
+        private List<string[]> assessmentList = new List<string[]>();
         public MainWindow()
         {
             InitializeComponent();
+            ReadFromFile();
             DisplayAssessments();
-            WriteToFile();
         }
 
         private void DisplayAssessments()
@@ -92,6 +89,19 @@ namespace AT2_AssessmentTracker_30093503
             catch (IOException ex)
             {
                 MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
+        }
+
+        private void BtnAddAssessment_Click(object sender, RoutedEventArgs e)
+        {
+            if (dueDate.SelectedDate == null
+                || string.IsNullOrWhiteSpace(assName.Text)
+                || string.IsNullOrWhiteSpace(unitName.Text)
+                || string.IsNullOrWhiteSpace(assType.Text))
+            {
+                MessageBox.Show("Please fill in Date, Name, Unit, and Type", "Input Error",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
             }
         }
     }
