@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Globalization;
+using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -27,22 +28,36 @@ namespace AT2_AssessmentTracker_30093503
             DisplayAssessments();
         }
 
-        private void EditAssessments()
+        private string[]? EditAssessments(string[] selectedAssessment)
         {
             var dialog = new editDialog();
-            dialog.dDate = DateTime.Today;
-            dialog.aName = "Assessment 1";
-            dialog.uName = "Unit1";
-            dialog.aType = "Type1";
-            dialog.SetScore(0);
+            string dDate = selectedAssessment[0];
+            if (!DateTime.TryParseExact(
+                dDate, "dd-MM-yyyy",
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.None,
+                out DateTime dateOutput))
+            {
+                return null;
+            }
+            dialog.dDate = dateOutput;
+            dialog.aName = selectedAssessment[1];
+            dialog.uName = selectedAssessment[2];
+            dialog.aType = selectedAssessment[3];
+            dialog.SetScore(selectedAssessment[4] == "NYM" ? 0 : selectedAssessment[4] == "NYS" ? 1 : 2);
             if (dialog.ShowDialog() == true)
             {
-                Console.Out.WriteLine(dialog.dDate.ToString());
-                Console.Out.WriteLine(dialog.aName);
-                Console.Out.WriteLine(dialog.uName);
-                Console.Out.WriteLine(dialog.aType);
-                Console.Out.WriteLine(dialog.GetScore());
+                string[] revisedAssessment = new string[]
+                {
+                    dialog.dDate.Value.ToString("dd-MM-yyyy"),
+                    dialog.aName,
+                    dialog.uName,
+                    dialog.aType,
+                    dialog.GetScore()
+                };
+                return revisedAssessment;
             }
+            return null;
         }
 
         private void DisplayAssessments()
@@ -53,7 +68,8 @@ namespace AT2_AssessmentTracker_30093503
             {
                 var displayItem = new
                 {
-                    Data = assessment,
+                    DataDelete = assessment,
+                    DataEdit = assessment,
                     Date = assessment[0],
                     Name = assessment[1],
                     Unit = assessment[2],
@@ -72,7 +88,7 @@ namespace AT2_AssessmentTracker_30093503
                 {
                     foreach (var assessment in assessmentList)
                     {
-                        writer.WriteLine($"{assessment[0]}|{assessment[1]}|{assessment[2]}|{assessment[3]}");
+                        writer.WriteLine($"{assessment[0]}|{assessment[1]}|{assessment[2]}|{assessment[3]}|{assessment[4]}");
                     }
                 }
             }
@@ -158,7 +174,18 @@ namespace AT2_AssessmentTracker_30093503
 
         private void BtnEditAssessment_Click(object sender, RoutedEventArgs e)
         {
-            return;
+            if (sender is Button button && button.Tag is string[] selectedAssessment)
+            {
+                int i = assessmentList.IndexOf(selectedAssessment);
+                string[]? revisedAssessment = EditAssessments(selectedAssessment);
+                if (revisedAssessment != null) 
+                {
+                    MessageBox.Show("Test");
+                    assessmentList[i] = revisedAssessment; 
+                }
+            }
+            WriteToFile();
+            DisplayAssessments();
         }
 
         private void MenuNewFile_Click(object sender, RoutedEventArgs e)

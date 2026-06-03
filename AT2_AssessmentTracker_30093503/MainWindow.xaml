@@ -79,7 +79,7 @@
                                         FontWeight="Bold"
                                         Foreground="red"
                                         Padding="4,0"
-                                        Tag="{Binding Data}"
+                                        Tag="{Binding DataDelete}"
                                         Click="BtnDeleteAssessment_Click"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
@@ -91,7 +91,7 @@
                                         FontWeight="Bold"
                                         Foreground="green"
                                         Padding="4,0"
-                                        Tag="{Binding Data}"
+                                        Tag="{Binding DataEdit}"
                                         Click="BtnEditAssessment_Click"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
