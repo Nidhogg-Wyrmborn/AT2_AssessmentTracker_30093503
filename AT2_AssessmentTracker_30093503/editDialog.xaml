@@ -1,0 +1,60 @@
+﻿<Window x:Class="AT2_AssessmentTracker_30093503.editDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AT2_AssessmentTracker_30093503"
+        mc:Ignorable="d"
+        Title="editDialog" Height="490" Width="630">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <!-- Inputs -->
+        </Grid.RowDefinitions>
+        <!--TODO: Inputs -->
+        <StackPanel Orientation="Horizontal" Margin="5" Grid.Row="0">
+            <!-- Due Date: Date Picker -->
+            <StackPanel Orientation="Vertical" Width="120" Margin="5,0,0,0">
+                <Label Content=" Due Date" FontWeight="Bold" Height="30" />
+                <DatePicker x:Name="dueDate" Height="30" />
+                <!-- Submit Button: Button -->
+                <StackPanel Orientation="Horizontal" Width="auto" Margin="0,5,0,0">
+                    <Button Content="Submit" FontWeight="Bold" Width="65" Height="30" Margin="0,5,0,0" Click="OKButton_Click"/>
+                </StackPanel>
+            </StackPanel>
+            <!-- Assessment Name: Text box -->
+            <StackPanel Orientation="Vertical" Width="150" Margin="5,0,0,0">
+                <Label Content="Assessment Name" FontWeight="Bold" Height="30" />
+                <TextBox x:Name="assName" Height="30" />
+            </StackPanel>
+            <!-- Unit Name: Text Box -->
+            <StackPanel Orientation="Vertical" Width="100" Margin="5,0,0,0">
+                <Label Content="Unit Name" FontWeight="Bold" Height="30" />
+                <TextBox x:Name="unitName" Height="30" />
+            </StackPanel>
+            <!-- Assessment Type: Text box -->
+            <StackPanel Orientation="Vertical" Width="150" Margin="5,0,0,0">
+                <Label Content="Assessment Type" FontWeight="Bold" Height="30" />
+                <TextBox x:Name="assType" Height="30" />
+                <DockPanel Width="auto" Margin="0,5,0,0">
+                    <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Width="auto" Margin="0,5,0,0">
+                        <MenuItem Click="SetScoreButton_Click" x:Name="SetScoreButton">
+                            <MenuItem.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="NYM" x:Name="ScoreText"/>
+                                </StackPanel>
+                            </MenuItem.Header>
+                            <MenuItem.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="NYM" IsCheckable="True" x:Name="MenuItemNYM" />
+                                    <MenuItem Header="NYS" IsCheckable="True" x:Name="MenuItemNYS" />
+                                    <MenuItem Header="S"   IsCheckable="True" x:Name="MenuItemS"   />
+                                </ContextMenu>
+                            </MenuItem.ContextMenu>
+                        </MenuItem>
+                    </StackPanel>
+                </DockPanel>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

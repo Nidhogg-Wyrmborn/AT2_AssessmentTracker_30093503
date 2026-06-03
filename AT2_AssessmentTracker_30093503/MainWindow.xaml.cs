@@ -27,6 +27,24 @@ namespace AT2_AssessmentTracker_30093503
             DisplayAssessments();
         }
 
+        private void EditAssessments()
+        {
+            var dialog = new editDialog();
+            dialog.dDate = DateTime.Today;
+            dialog.aName = "Assessment 1";
+            dialog.uName = "Unit1";
+            dialog.aType = "Type1";
+            dialog.SetScore(0);
+            if (dialog.ShowDialog() == true)
+            {
+                Console.Out.WriteLine(dialog.dDate.ToString());
+                Console.Out.WriteLine(dialog.aName);
+                Console.Out.WriteLine(dialog.uName);
+                Console.Out.WriteLine(dialog.aType);
+                Console.Out.WriteLine(dialog.GetScore());
+            }
+        }
+
         private void DisplayAssessments()
         {
             lvwAssessments.Items.Clear();
