@@ -16,9 +16,32 @@ namespace AT2_AssessmentTracker_30093503
     /// </summary>
     public partial class MainWindow : Window
     {
+        private List<string[]> assessmentList = new List<string[]> 
+        { 
+            new string[] {"2026-01-01", "Assessment 1", "Unit1", "Type1"}
+        };
         public MainWindow()
         {
             InitializeComponent();
+            DisplayAssessments();
+        }
+
+        private void DisplayAssessments()
+        {
+            lvwAssessments.Items.Clear();
+
+            foreach (var assessment in assessmentList)
+            {
+                var displayItem = new
+                {
+                    Data = assessment,
+                    Date = assessment[0],
+                    Name = assessment[1],
+                    Unit = assessment[2],
+                    UnitType = assessment[3]
+                };
+                lvwAssessments.Items.Add(displayItem);
+            }
         }
     }
 }

@@ -10,9 +10,9 @@
         MinWidth="600">
     <Grid Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" /> <!-- Menu Bar -->
+            <RowDefinition Height="Auto" /> <!-- Inputs -->
+            <RowDefinition Height="Auto" /> <!-- displays -->
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
@@ -23,6 +23,16 @@
                 <MenuItem Header="Save As" />
                 <Separator />
                 <MenuItem Header="Exit" />
+            </MenuItem>
+            <MenuItem Header="View">
+                <MenuItem Header="Sort by">
+                    <MenuItem Header="Name" IsCheckable="True" />
+                    <MenuItem Header="Date" IsCheckable="True" />
+                    <MenuItem Header="Unit" IsCheckable="True" />
+                    <MenuItem Header="Type" IsCheckable="True" />
+                    <MenuItem Header="Completion" IsCheckable="True" />
+                </MenuItem>
+                <MenuItem Header="Hide Complete" IsCheckable="True" />
             </MenuItem>
         </Menu>
         <!--TODO: Inputs -->
@@ -58,26 +68,22 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Date" Width="100" DisplayMemberBinding="{Binding Date}" />
-                    <GridViewColumn Header="Assessment Name" Width="220" DisplayMemberBinding="{Binding Assessment}" />
+                    <GridViewColumn Header="Assessment Name" Width="170" DisplayMemberBinding="{Binding Name}" />
                     <GridViewColumn Header="Unit" Width="100" DisplayMemberBinding="{Binding Unit}" />
-                    <GridViewColumn Header="Type" Width="100" DisplayMemberBinding="{Binding Type}" />
-                    <GridViewColumn Header="" Width="40">
+                    <GridViewColumn Header="Type" Width="100" DisplayMemberBinding="{Binding UnitType}" />
+                    <GridViewColumn Header="" Width="100">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Content="&#x274C;"
                                         FontWeight="Bold"
                                         Foreground="red"
                                         Padding="4,0"
-                                        Tag=""/>
+                                        Tag="{Binding Data}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
-        <!-- sorting buttons -->
-        <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Right" Margin="5">
-            <Button />
-        </StackPanel>
     </Grid>
 </Window>
