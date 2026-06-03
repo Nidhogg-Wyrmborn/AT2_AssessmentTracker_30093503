@@ -94,6 +94,21 @@ namespace AT2_AssessmentTracker_30093503
                 };
                 lvwAssessments.Items.Add(displayItem);
             }
+
+            foreach (var assessment in completedList)
+            {
+                var displayItem = new
+                {
+                    DataDelete = assessment,
+                    DataEdit = assessment,
+                    Date = assessment[0],
+                    Name = assessment[1],
+                    Unit = assessment[2],
+                    UnitType = assessment[3],
+                    Score = assessment[4]
+                };
+                lvwAssessments.Items.Add(displayItem);
+            }
         }
 
         /// <summary>
@@ -107,6 +122,11 @@ namespace AT2_AssessmentTracker_30093503
                 using (StreamWriter writer = new StreamWriter(textFile))
                 {
                     foreach (var assessment in assessmentList)
+                    {
+                        writer.WriteLine($"{assessment[0]}|{assessment[1]}|{assessment[2]}|{assessment[3]}|{assessment[4]}");
+                    }
+
+                    foreach (var assessment in completedList)
                     {
                         writer.WriteLine($"{assessment[0]}|{assessment[1]}|{assessment[2]}|{assessment[3]}|{assessment[4]}");
                     }
@@ -134,14 +154,28 @@ namespace AT2_AssessmentTracker_30093503
                         string[] parts = line.Split('|');
                         if (parts.Length == 5)
                         {
-                            assessmentList.Add(new string[]
+                            if (parts[4] != "S")
                             {
-                                parts[0],
-                                parts[1],
-                                parts[2],
-                                parts[3],
-                                parts[4]
-                            });
+                                assessmentList.Add(new string[]
+                                {
+                                    parts[0],
+                                    parts[1],
+                                    parts[2],
+                                    parts[3],
+                                    parts[4]
+                                });
+                            }
+                            else
+                            {
+                                completedList.Add(new string[]
+                                {
+                                    parts[0],
+                                    parts[1],
+                                    parts[2],
+                                    parts[3],
+                                    parts[4]
+                                });
+                            }
                         }
                         
                     }
@@ -202,9 +236,18 @@ namespace AT2_AssessmentTracker_30093503
         {
             if (sender is Button button && button.Tag is string[] selectedAssessment)
             {
-                assessmentList.Remove(selectedAssessment);
-                WriteToFile();
-                DisplayAssessments();
+                if (selectedAssessment[4] != "S")
+                {
+                    assessmentList.Remove(selectedAssessment);
+                    WriteToFile();
+                    DisplayAssessments();
+                }
+                else
+                {
+                    completedList.Remove(selectedAssessment);
+                    WriteToFile();
+                    DisplayAssessments();
+                }
             }
         }
 
@@ -218,12 +261,42 @@ namespace AT2_AssessmentTracker_30093503
         {
             if (sender is Button button && button.Tag is string[] selectedAssessment)
             {
-                int i = assessmentList.IndexOf(selectedAssessment);
                 string[]? revisedAssessment = EditAssessments(selectedAssessment);
                 if (revisedAssessment != null) 
                 {
+                    if (revisedAssessment == selectedAssessment)
+                    {
+                        WriteToFile();
+                        DisplayAssessments();
+                        return;
+                    }
                     // MessageBox.Show("Test");
-                    assessmentList[i] = revisedAssessment; 
+                    if (revisedAssessment[4] == "S")
+                    {
+                        if (selectedAssessment[4] != "S")
+                        {
+                            completedList.Add(revisedAssessment);
+                            assessmentList.Remove(selectedAssessment);
+                        }
+                        else
+                        {
+                            int i = completedList.IndexOf(selectedAssessment);
+                            completedList[i] = revisedAssessment;
+                        }
+                    }
+                    else
+                    {
+                        if (selectedAssessment[4] == "S")
+                        {
+                            assessmentList.Add(revisedAssessment);
+                            completedList.Remove(selectedAssessment);
+                        }
+                        else
+                        {
+                            int i = assessmentList.IndexOf(selectedAssessment);
+                            assessmentList[i] = revisedAssessment;
+                        }
+                    }
                 }
             }
             WriteToFile();
