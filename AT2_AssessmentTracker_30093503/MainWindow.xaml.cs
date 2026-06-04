@@ -37,7 +37,7 @@ namespace AT2_AssessmentTracker_30093503
             dueDate.SelectedDate = DateTime.Today; // set the dueDate in assessment Inputs to today's date
             MSC.IsChecked = showComplete;
             MSD.IsChecked = true;
-            ReadFromFile(); // read assessments from default file (this will change to open_file dialog later)
+            LoadFromFile();
             DisplayAssessments(); // display assessments
         }
 
