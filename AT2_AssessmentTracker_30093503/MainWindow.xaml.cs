@@ -25,7 +25,7 @@ namespace AT2_AssessmentTracker_30093503
         private List<string[]> assessmentList = new List<string[]>(); // list of In progress assessments
         private List<string[]> completedList = new List<string[]>(); // list of completed assessments
         private bool showComplete = true; // boolean to show completed assessments (completion sorting effectively)
-        private int sortMethod = 0; // 0 = auto, 1 = dueDate, 2 = unit, 3 = type, 4 = name, 5+ = invalid (will automatically reset to 0)
+        private int sortMethod = 0; // 0 = dueDate, 1 = Name, 2 = Unit, 3 = Type, 4+ = invalid (will automatically reset to 0)
 
         /// <summary>
         /// Initializes a new instance of the MainWindow class, sets the due date to today, loads assessments from a
@@ -36,6 +36,7 @@ namespace AT2_AssessmentTracker_30093503
             InitializeComponent();
             dueDate.SelectedDate = DateTime.Today; // set the dueDate in assessment Inputs to today's date
             MSC.IsChecked = showComplete;
+            MSD.IsChecked = true;
             ReadFromFile(); // read assessments from default file (this will change to open_file dialog later)
             DisplayAssessments(); // display assessments
         }
@@ -122,9 +123,25 @@ namespace AT2_AssessmentTracker_30093503
             }
         }
 
+        /// <summary>
+        /// Sorts the lists based on sortMethod (int)
+        /// will only sort the completed list if it requires displaying
+        /// will only sort if there has been a change since last sort (later)
+        /// (should automatically be easy, display should only be called if there has been a change)
+        /// </summary>
         private void sortList()
         {
+            // always sort assessmentList
+            List<string[]> aList = assessmentList.OrderBy(arr => arr[sortMethod]).ToList();
+            assessmentList = aList;
 
+            // only sort completed list if we are showing completed assessments
+            if (showComplete)
+            {
+                List<string[]> cList = completedList.OrderBy(arr => arr[sortMethod]).ToList();
+                completedList = cList;
+            }
+            
         }
 
         /// <summary>
@@ -445,16 +462,17 @@ namespace AT2_AssessmentTracker_30093503
             {
                 if (MSN.IsChecked)
                 {
-                    sortMethod = 4;
+                    sortMethod = 1;
                     MST.IsChecked = false;
                     MSU.IsChecked = false;
                     MSD.IsChecked = false;
                 }
                 else
                 {
-                    sortMethod = 0;
+                    MSN.IsChecked = true;
                 }
             }
+            DisplayAssessments();
         }
 
         /// <summary>
@@ -469,16 +487,17 @@ namespace AT2_AssessmentTracker_30093503
             {
                 if (MSD.IsChecked)
                 {
-                    sortMethod = 1;
+                    sortMethod = 0;
                     MSN.IsChecked = false;
                     MSU.IsChecked = false;
                     MST.IsChecked = false;
                 }
                 else
                 {
-                    sortMethod = 0;
+                    MSD.IsChecked = true;
                 }
             }
+            DisplayAssessments();
         }
 
         /// <summary>
@@ -500,9 +519,10 @@ namespace AT2_AssessmentTracker_30093503
                 }
                 else
                 {
-                    sortMethod = 0;
+                    MSU.IsChecked = true;
                 }
             }
+            DisplayAssessments();
         }
 
         /// <summary>
@@ -524,9 +544,10 @@ namespace AT2_AssessmentTracker_30093503
                 }
                 else
                 {
-                    sortMethod = 0;
+                    MST.IsChecked = true;
                 }
             }
+            DisplayAssessments();
         }
 
         /// <summary>
