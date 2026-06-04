@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using Microsoft.Win32;
+using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Windows;
@@ -185,6 +186,34 @@ namespace AT2_AssessmentTracker_30093503
             {
                 MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
+        }
+
+        /// <summary>
+        /// opens a dialog to select a file, then sets textFile to the selection (it will end up being a path)
+        /// </summary>
+        private void LoadFromFile()
+        {
+            OpenFileDialog ofd = new();
+            if (ofd.ShowDialog() == true)
+            {
+                textFile = ofd.FileName;
+                ReadFromFile();
+                DisplayAssessments();
+                return;
+            }
+            MessageBox.Show("No File selected");
+        }
+
+        private void SaveFileAs()
+        {
+            SaveFileDialog sfd = new();
+            if (sfd.ShowDialog() == true)
+            {
+                textFile = sfd.FileName;
+                WriteToFile();
+                return;
+            }
+            MessageBox.Show("No File Selected");
         }
 
         /// <summary>

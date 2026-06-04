@@ -1,13 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "WtfTuQbiabM=",
+  "dgSpecHash": "Ly4ij2R+P/s=",
   "success": true,
-  "projectFilePath": "D:\\Tafe\\C# Course\\AT2\\2.3\\Repo\\AT2_AssessmentTracker_30093503\\AT2_AssessmentTracker_30093503\\AT2_AssessmentTracker_30093503.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\30093503\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.22\\microsoft.windowsdesktop.app.ref.8.0.22.nupkg.sha512",
-    "C:\\Users\\30093503\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.22\\microsoft.netcore.app.ref.8.0.22.nupkg.sha512",
-    "C:\\Users\\30093503\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.22\\microsoft.aspnetcore.app.ref.8.0.22.nupkg.sha512",
-    "C:\\Users\\30093503\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\8.0.22\\microsoft.netcore.app.host.win-x64.8.0.22.nupkg.sha512"
-  ],
+  "projectFilePath": "F:\\Tafe\\C# Course\\AT2\\2.3\\Repo\\AT2_AssessmentTracker_30093503\\AT2_AssessmentTracker_30093503\\AT2_AssessmentTracker_30093503.csproj",
+  "expectedPackageFiles": [],
   "logs": []
 }
