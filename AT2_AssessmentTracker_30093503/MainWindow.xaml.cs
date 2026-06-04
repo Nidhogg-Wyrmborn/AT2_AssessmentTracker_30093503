@@ -24,7 +24,8 @@ namespace AT2_AssessmentTracker_30093503
         private string textFile = "default.txt";
         private List<string[]> assessmentList = new List<string[]>(); // list of In progress assessments
         private List<string[]> completedList = new List<string[]>(); // list of completed assessments
-        private bool showComplete = true;
+        private bool showComplete = true; // boolean to show completed assessments (completion sorting effectively)
+        private int sortMethod = 0; // 0 = auto, 1 = dueDate, 2 = unit, 3 = type, 4 = name, 5+ = invalid (will automatically reset to 0)
 
         /// <summary>
         /// Initializes a new instance of the MainWindow class, sets the due date to today, loads assessments from a
@@ -83,6 +84,8 @@ namespace AT2_AssessmentTracker_30093503
         {
             lvwAssessments.Items.Clear();
 
+            sortList();
+
             foreach (var assessment in assessmentList)
             {
                 var displayItem = new
@@ -117,6 +120,11 @@ namespace AT2_AssessmentTracker_30093503
                 };
                 lvwAssessments.Items.Add(displayItem);
             }
+        }
+
+        private void sortList()
+        {
+
         }
 
         /// <summary>
@@ -432,7 +440,21 @@ namespace AT2_AssessmentTracker_30093503
         /// <param name="e">Event data associated with the click event.</param>
         private void MenuSortName_Click(object sender, RoutedEventArgs e)
         {
-            return;
+            var button = sender as MenuItem;
+            if (button != null)
+            {
+                if (MSN.IsChecked)
+                {
+                    sortMethod = 4;
+                    MST.IsChecked = false;
+                    MSU.IsChecked = false;
+                    MSD.IsChecked = false;
+                }
+                else
+                {
+                    sortMethod = 0;
+                }
+            }
         }
 
         /// <summary>
@@ -442,7 +464,21 @@ namespace AT2_AssessmentTracker_30093503
         /// <param name="e">The event data.</param>
         private void MenuSortDate_Click(object sender, RoutedEventArgs e)
         {
-            return;
+            var button = sender as MenuItem;
+            if (button != null)
+            {
+                if (MSD.IsChecked)
+                {
+                    sortMethod = 1;
+                    MSN.IsChecked = false;
+                    MSU.IsChecked = false;
+                    MST.IsChecked = false;
+                }
+                else
+                {
+                    sortMethod = 0;
+                }
+            }
         }
 
         /// <summary>
@@ -452,7 +488,21 @@ namespace AT2_AssessmentTracker_30093503
         /// <param name="e">The event data.</param>
         private void MenuSortUnit_Click(object sender, RoutedEventArgs e)
         {
-            return;
+            var button = sender as MenuItem;
+            if (button != null)
+            {
+                if (MSU.IsChecked)
+                {
+                    sortMethod = 2;
+                    MSN.IsChecked = false;
+                    MST.IsChecked = false;
+                    MSD.IsChecked = false;
+                }
+                else
+                {
+                    sortMethod = 0;
+                }
+            }
         }
 
         /// <summary>
@@ -462,7 +512,21 @@ namespace AT2_AssessmentTracker_30093503
         /// <param name="e">The event data.</param>
         private void MenuSortType_Click(object sender, RoutedEventArgs e)
         {
-            return;
+            var button = sender as MenuItem;
+            if (button != null)
+            {
+                if (MST.IsChecked)
+                {
+                    sortMethod = 3;
+                    MSN.IsChecked = false;
+                    MSU.IsChecked = false;
+                    MSD.IsChecked = false;
+                }
+                else
+                {
+                    sortMethod = 0;
+                }
+            }
         }
 
         /// <summary>
