@@ -229,6 +229,8 @@ namespace AT2_AssessmentTracker_30093503
             OpenFileDialog ofd = new();
             if (ofd.ShowDialog() == true)
             {
+                assessmentList = new List<string[]>();
+                completedList = new List<string[]>();
                 textFile = ofd.FileName;
                 ReadFromFile();
                 DisplayAssessments();
