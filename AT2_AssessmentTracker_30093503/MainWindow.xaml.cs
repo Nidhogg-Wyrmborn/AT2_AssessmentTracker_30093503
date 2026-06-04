@@ -24,6 +24,7 @@ namespace AT2_AssessmentTracker_30093503
         private string textFile = "default.txt";
         private List<string[]> assessmentList = new List<string[]>(); // list of In progress assessments
         private List<string[]> completedList = new List<string[]>(); // list of completed assessments
+        private bool showComplete = true;
 
         /// <summary>
         /// Initializes a new instance of the MainWindow class, sets the due date to today, loads assessments from a
@@ -33,6 +34,7 @@ namespace AT2_AssessmentTracker_30093503
         {
             InitializeComponent();
             dueDate.SelectedDate = DateTime.Today; // set the dueDate in assessment Inputs to today's date
+            MSC.IsChecked = showComplete;
             ReadFromFile(); // read assessments from default file (this will change to open_file dialog later)
             DisplayAssessments(); // display assessments
         }
@@ -94,6 +96,11 @@ namespace AT2_AssessmentTracker_30093503
                     Score = assessment[4]
                 };
                 lvwAssessments.Items.Add(displayItem);
+            }
+
+            if (!showComplete)
+            {
+                return;
             }
 
             foreach (var assessment in completedList)
@@ -190,6 +197,7 @@ namespace AT2_AssessmentTracker_30093503
 
         /// <summary>
         /// opens a dialog to select a file, then sets textFile to the selection (it will end up being a path)
+        /// after selecting it will automatically load and display that file
         /// </summary>
         private void LoadFromFile()
         {
@@ -204,12 +212,30 @@ namespace AT2_AssessmentTracker_30093503
             MessageBox.Show("No File selected");
         }
 
+        /// <summary>
+        /// opens a dialog to select a file, sets the textFile to the selection (it will end up being a path)
+        /// after selecting it will automatically save to that file.
+        /// </summary>
         private void SaveFileAs()
         {
             SaveFileDialog sfd = new();
             if (sfd.ShowDialog() == true)
             {
                 textFile = sfd.FileName;
+                WriteToFile();
+                return;
+            }
+            MessageBox.Show("No File Selected");
+        }
+
+        private void NewFileAs()
+        {
+            SaveFileDialog sfd = new();
+            if (sfd.ShowDialog() == true)
+            {
+                textFile = sfd.FileName;
+                completedList = new List<string[]>();
+                assessmentList = new List<string[]>();
                 WriteToFile();
                 return;
             }
@@ -339,7 +365,8 @@ namespace AT2_AssessmentTracker_30093503
         /// <param name="e">Event data for the routed event.</param>
         private void MenuNewFile_Click(object sender, RoutedEventArgs e)
         {
-            return;
+            NewFileAs();
+            DisplayAssessments();
         }
 
         /// <summary>
@@ -349,7 +376,7 @@ namespace AT2_AssessmentTracker_30093503
         /// <param name="e">The event data.</param>
         private void MenuOpenFile_Click(object sender, RoutedEventArgs e)
         {
-            return;
+            LoadFromFile();
         }
 
         /// <summary>
@@ -359,7 +386,8 @@ namespace AT2_AssessmentTracker_30093503
         /// <param name="e">Event data associated with the click event.</param>
         private void MenuSaveFile_Click(object sender, RoutedEventArgs e)
         {
-            return;
+            WriteToFile();
+            MessageBox.Show($"Saved assessments to \"{textFile}\"");
         }
 
         /// <summary>
@@ -369,7 +397,7 @@ namespace AT2_AssessmentTracker_30093503
         /// <param name="e">The event data.</param>
         private void MenuSaveAsFile_Click(object sender, RoutedEventArgs e)
         {
-            return;
+            SaveFileAs();
         }
 
         /// <summary>
@@ -379,7 +407,7 @@ namespace AT2_AssessmentTracker_30093503
         /// <param name="e">Event data for the routed event.</param>
         private void MenuQuit_Click(object sender, RoutedEventArgs e)
         {
-            return;
+            this.Close();
         }
 
         /// <summary>
@@ -389,7 +417,12 @@ namespace AT2_AssessmentTracker_30093503
         /// <param name="e">Event data associated with the click event.</param>
         private void MenuShowComplete_Click(object sender, RoutedEventArgs e)
         {
-            return;
+            var button = sender as MenuItem;
+            if (button != null)
+            {
+                showComplete = button.IsChecked;
+            }
+            DisplayAssessments();
         }
 
         /// <summary>

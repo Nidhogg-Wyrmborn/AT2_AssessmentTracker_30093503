@@ -28,12 +28,12 @@
             </MenuItem>
             <MenuItem Header="View">
                 <MenuItem Header="Sort by">
-                    <MenuItem Header="Name" IsCheckable="True" Click="MenuSortName_Click"/>
-                    <MenuItem Header="Date" IsCheckable="True" Click="MenuSortDate_Click"/>
-                    <MenuItem Header="Unit" IsCheckable="True" Click="MenuSortUnit_Click"/>
-                    <MenuItem Header="Type" IsCheckable="True" Click="MenuSortType_Click"/>
+                    <MenuItem Header="Name" IsCheckable="True" Click="MenuSortName_Click" x:Name="MSN" />
+                    <MenuItem Header="Date" IsCheckable="True" Click="MenuSortDate_Click" x:Name="MSD" />
+                    <MenuItem Header="Unit" IsCheckable="True" Click="MenuSortUnit_Click" x:Name="MSU" />
+                    <MenuItem Header="Type" IsCheckable="True" Click="MenuSortType_Click" x:Name="MST" />
                 </MenuItem>
-                <MenuItem Header="Show Complete" Click="MenuShowComplete_Click"/>
+                <MenuItem Header="Show Complete" IsCheckable="True" Click="MenuShowComplete_Click" x:Name="MSC" />
             </MenuItem>
         </Menu>
         <!--TODO: Inputs -->
