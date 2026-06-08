@@ -26,6 +26,7 @@ namespace AT2_AssessmentTracker_30093503
         private List<string[]> assessmentList = new List<string[]>(); // list of In progress assessments
         private List<string[]> completedList = new List<string[]>(); // list of completed assessments
         private bool showComplete = true; // boolean to show completed assessments (completion sorting effectively)
+        private bool showIncomplete = true; // boolean to show incomplete assessments (completion sorting effectively)
         private int sortMethod = 0; // 0 = dueDate, 1 = Name, 2 = Unit, 3 = Type, 4+ = invalid (will automatically reset to 0)
 
         /// <summary>
@@ -36,7 +37,7 @@ namespace AT2_AssessmentTracker_30093503
         {
             InitializeComponent();
             dueDate.SelectedDate = DateTime.Today; // set the dueDate in assessment Inputs to today's date
-            MSC.IsChecked = showComplete;
+            MSA.IsChecked = true;
             MSD.IsChecked = true;
             if (File.Exists(textFile))
             {
@@ -94,41 +95,42 @@ namespace AT2_AssessmentTracker_30093503
         {
             lvwAssessments.Items.Clear();
 
-            sortList();
-
-            foreach (var assessment in assessmentList)
+            if (showIncomplete)
             {
-                var displayItem = new
+
+                sortList();
+
+                foreach (var assessment in assessmentList)
                 {
-                    DataDelete = assessment,
-                    DataEdit = assessment,
-                    Date = assessment[0],
-                    Name = assessment[1],
-                    Unit = assessment[2],
-                    UnitType = assessment[3],
-                    Score = assessment[4]
-                };
-                lvwAssessments.Items.Add(displayItem);
+                    var displayItem = new
+                    {
+                        DataDelete = assessment,
+                        DataEdit = assessment,
+                        Date = assessment[0],
+                        Name = assessment[1],
+                        Unit = assessment[2],
+                        UnitType = assessment[3],
+                        Score = assessment[4]
+                    };
+                    lvwAssessments.Items.Add(displayItem);
+                }
             }
-
-            if (!showComplete)
+            if (showComplete)
             {
-                return;
-            }
-
-            foreach (var assessment in completedList)
-            {
-                var displayItem = new
+                foreach (var assessment in completedList)
                 {
-                    DataDelete = assessment,
-                    DataEdit = assessment,
-                    Date = assessment[0],
-                    Name = assessment[1],
-                    Unit = assessment[2],
-                    UnitType = assessment[3],
-                    Score = assessment[4]
-                };
-                lvwAssessments.Items.Add(displayItem);
+                    var displayItem = new
+                    {
+                        DataDelete = assessment,
+                        DataEdit = assessment,
+                        Date = assessment[0],
+                        Name = assessment[1],
+                        Unit = assessment[2],
+                        UnitType = assessment[3],
+                        Score = assessment[4]
+                    };
+                    lvwAssessments.Items.Add(displayItem);
+                }
             }
         }
 
@@ -236,8 +238,21 @@ namespace AT2_AssessmentTracker_30093503
         /// </summary>
         private void LoadFromFile()
         {
-            OpenFileDialog ofd = new();
+            if (File.Exists(textFile))
+            {
+                WriteToFile();
+            } 
+            else
+            {
+                var Result = MessageBox.Show("Warning, File Does not Exist: \nCreate new File?", "Create new?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (Result == MessageBoxResult.Yes)
+                {
+                    SaveFileAs();
+                }
+            }
+                OpenFileDialog ofd = new();
             ofd.InitialDirectory = Directory.GetCurrentDirectory();
+            ofd.Filter = "Text|*.txt|All|*.*";
             if (ofd.ShowDialog() == true)
             {
                 assessmentList = new List<string[]>();
@@ -258,6 +273,7 @@ namespace AT2_AssessmentTracker_30093503
         {
             SaveFileDialog sfd = new();
             sfd.InitialDirectory = Directory.GetCurrentDirectory();
+            sfd.Filter = "Text|*.txt|All|*.*";
             if (sfd.ShowDialog() == true)
             {
                 textFile = sfd.FileName;
@@ -271,6 +287,7 @@ namespace AT2_AssessmentTracker_30093503
         {
             SaveFileDialog sfd = new();
             sfd.InitialDirectory = Directory.GetCurrentDirectory();
+            sfd.Filter = "Text|*.txt|All|*.*";
             if (sfd.ShowDialog() == true)
             {
                 textFile = sfd.FileName;
@@ -310,7 +327,7 @@ namespace AT2_AssessmentTracker_30093503
 
             assessmentList.Add(row);
 
-            WriteToFile();
+            //WriteToFile();
             DisplayAssessments();
 
             dueDate.SelectedDate = DateTime.Today;
@@ -334,13 +351,13 @@ namespace AT2_AssessmentTracker_30093503
                 if (selectedAssessment[4] != "S")
                 {
                     assessmentList.Remove(selectedAssessment);
-                    WriteToFile();
+                    //WriteToFile();
                     DisplayAssessments();
                 }
                 else
                 {
                     completedList.Remove(selectedAssessment);
-                    WriteToFile();
+                    //WriteToFile();
                     DisplayAssessments();
                 }
             }
@@ -361,7 +378,7 @@ namespace AT2_AssessmentTracker_30093503
                 {
                     if (revisedAssessment == selectedAssessment)
                     {
-                        WriteToFile();
+                        //WriteToFile();
                         DisplayAssessments();
                         return;
                     }
@@ -394,7 +411,7 @@ namespace AT2_AssessmentTracker_30093503
                     }
                 }
             }
-            WriteToFile();
+            //WriteToFile();
             DisplayAssessments();
         }
 
@@ -457,11 +474,10 @@ namespace AT2_AssessmentTracker_30093503
         /// <param name="e">Event data associated with the click event.</param>
         private void MenuShowComplete_Click(object sender, RoutedEventArgs e)
         {
-            var button = sender as MenuItem;
-            if (button != null)
-            {
-                showComplete = button.IsChecked;
-            }
+            showComplete = true;
+            showIncomplete = false;
+            MSA.IsChecked = false;
+            MSI.IsChecked = false;
             DisplayAssessments();
         }
 
@@ -573,6 +589,24 @@ namespace AT2_AssessmentTracker_30093503
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             WriteToFile(); // until save and load functionality (to custom files) is implemented, just this will suffice
+        }
+
+        private void MenuShowAll_Click(object sender, RoutedEventArgs e)
+        {
+            showComplete = true;
+            showIncomplete = true;
+            MSC.IsChecked = false;
+            MSI.IsChecked = false;
+            DisplayAssessments();
+        }
+
+        private void MenuShowIncomplete_Click(object sender, RoutedEventArgs e)
+        {
+            showIncomplete = true;
+            showComplete = false;
+            MSC.IsChecked = false;
+            MSA.IsChecked = false;
+            DisplayAssessments();
         }
     }
 }

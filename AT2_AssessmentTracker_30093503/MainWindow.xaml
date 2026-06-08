@@ -33,7 +33,12 @@
                     <MenuItem Header="Unit" IsCheckable="True" Click="MenuSortUnit_Click" x:Name="MSU" />
                     <MenuItem Header="Type" IsCheckable="True" Click="MenuSortType_Click" x:Name="MST" />
                 </MenuItem>
-                <MenuItem Header="Show Complete" IsCheckable="True" Click="MenuShowComplete_Click" x:Name="MSC" />
+                <MenuItem Header="Show">
+                    <MenuItem Header="All" IsCheckable="True" Click="MenuShowAll_Click" x:Name="MSA"/>
+                    <Separator/>
+                    <MenuItem Header="Complete" IsCheckable="True" Click="MenuShowComplete_Click" x:Name="MSC" />
+                    <MenuItem Header="Incomplete" IsCheckable="True" Click="MenuShowIncomplete_Click" x:Name="MSI"/>
+                </MenuItem>
             </MenuItem>
         </Menu>
         <!--TODO: Inputs -->
