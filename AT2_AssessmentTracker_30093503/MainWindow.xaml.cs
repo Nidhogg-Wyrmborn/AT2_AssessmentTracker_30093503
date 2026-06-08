@@ -315,6 +315,7 @@ namespace AT2_AssessmentTracker_30093503
                 textFile = ofd.FileName;
                 ReadFromFile();
                 DisplayAssessments();
+                DisplayOverdue();
                 return;
             }
             MessageBox.Show("No File selected");
