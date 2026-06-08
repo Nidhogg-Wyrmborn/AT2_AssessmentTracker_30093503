@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System.Globalization;
 using System.IO;
+using System.Security.Cryptography;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -37,7 +38,15 @@ namespace AT2_AssessmentTracker_30093503
             dueDate.SelectedDate = DateTime.Today; // set the dueDate in assessment Inputs to today's date
             MSC.IsChecked = showComplete;
             MSD.IsChecked = true;
-            LoadFromFile();
+            if (File.Exists(textFile))
+            {
+                ReadFromFile();
+            }
+            else
+            {
+                WriteToFile();
+            }
+
             DisplayAssessments(); // display assessments
         }
 
@@ -133,6 +142,7 @@ namespace AT2_AssessmentTracker_30093503
         {
             // always sort assessmentList
             List<string[]> aList = assessmentList.OrderBy(arr => arr[sortMethod]).ToList();
+            aList = aList.OrderByDescending(arr => arr[4]).ToList();
             assessmentList = aList;
 
             // only sort completed list if we are showing completed assessments
@@ -227,6 +237,7 @@ namespace AT2_AssessmentTracker_30093503
         private void LoadFromFile()
         {
             OpenFileDialog ofd = new();
+            ofd.InitialDirectory = Directory.GetCurrentDirectory();
             if (ofd.ShowDialog() == true)
             {
                 assessmentList = new List<string[]>();
@@ -246,6 +257,7 @@ namespace AT2_AssessmentTracker_30093503
         private void SaveFileAs()
         {
             SaveFileDialog sfd = new();
+            sfd.InitialDirectory = Directory.GetCurrentDirectory();
             if (sfd.ShowDialog() == true)
             {
                 textFile = sfd.FileName;
@@ -258,6 +270,7 @@ namespace AT2_AssessmentTracker_30093503
         private void NewFileAs()
         {
             SaveFileDialog sfd = new();
+            sfd.InitialDirectory = Directory.GetCurrentDirectory();
             if (sfd.ShowDialog() == true)
             {
                 textFile = sfd.FileName;
