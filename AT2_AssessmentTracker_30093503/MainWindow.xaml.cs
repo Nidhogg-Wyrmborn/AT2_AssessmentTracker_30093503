@@ -1,4 +1,6 @@
 ﻿using Microsoft.Win32;
+using Notification.Core;
+using Notification.Wpf;
 using System.Globalization;
 using System.IO;
 using System.Security.Cryptography;
@@ -28,6 +30,7 @@ namespace AT2_AssessmentTracker_30093503
         private bool showComplete = true; // boolean to show completed assessments (completion sorting effectively)
         private bool showIncomplete = true; // boolean to show incomplete assessments (completion sorting effectively)
         private int sortMethod = 0; // 0 = dueDate, 1 = Name, 2 = Unit, 3 = Type, 4+ = invalid (will automatically reset to 0)
+        private INotificationManager notifier = new NotificationManager();
 
         /// <summary>
         /// Initializes a new instance of the MainWindow class, sets the due date to today, loads assessments from a
@@ -36,6 +39,9 @@ namespace AT2_AssessmentTracker_30093503
         public MainWindow()
         {
             InitializeComponent();
+
+            Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
+
             dueDate.SelectedDate = DateTime.Today; // set the dueDate in assessment Inputs to today's date
             MSA.IsChecked = true;
             MSD.IsChecked = true;
@@ -49,6 +55,55 @@ namespace AT2_AssessmentTracker_30093503
             }
 
             DisplayAssessments(); // display assessments
+
+            DisplayOverdue(); // display overdue assessments
+        }
+
+        private void DisplayOverdue()
+        {
+            foreach (string[] assessment in assessmentList)
+            {
+                string Title = assessment[4] == "NYM" ? "OverDue!" : assessment[4] == "NYS" ? "Check!" : "WTF";
+                bool od = isOverDue(assessment[0]);
+                if (Title != "Check!" && od)
+                {
+                    notifier.Show(NotificationBuilder
+                        .Create(Title, $"{assessment[1]}: {assessment[0]}")
+                        .AsWarning()
+                        .NeverExpires()
+                        .WithPriority(NotificationPriority.High)
+                        .OnClick(() => Console.WriteLine("Clicked"))
+                        .Build());
+                }
+                else if (od)
+                {
+                    notifier.Show(NotificationBuilder
+                        .Create(Title, $"{assessment[1]}: {assessment[0]}")
+                        .AsSuccess()
+                        .NeverExpires()
+                        .WithPriority(NotificationPriority.High)
+                        .OnClick(() => Console.WriteLine("Clicked"))
+                        .Build());
+                }
+            }
+        }
+
+        private bool isOverDue(string date)
+        {
+            if (!DateTime.TryParseExact(
+                date, "dd-MM-yyyy",
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.None,
+                out DateTime dateOutput))
+            {
+                return false;
+            }
+
+            if (dateOutput < DateTime.Today)
+            {
+                return true;
+            }
+            return false;
         }
 
         /// <summary>
